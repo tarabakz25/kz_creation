@@ -1,5 +1,7 @@
+@config "../../tailwind.config.ts";
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "@fontsource/fugaz-one";
 
 @custom-variant dark (&:is(.dark *));
 

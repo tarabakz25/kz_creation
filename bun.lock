@@ -5,6 +5,9 @@
       "name": "kanikanlab-v1-2",
       "dependencies": {
         "@astrojs/react": "^4.4.0",
+        "@fontsource/fugaz-one": "^5.2.7",
+        "@fontsource/twinkle-star": "^5.2.8",
+        "@gsap/react": "^2.1.2",
         "@hookform/resolvers": "^5.2.2",
         "@radix-ui/react-accordion": "^1.2.12",
         "@radix-ui/react-alert-dialog": "^1.1.15",
@@ -180,6 +183,12 @@
     "@floating-ui/react-dom": ["@floating-ui/react-dom@2.1.6", "", { "dependencies": { "@floating-ui/dom": "^1.7.4" }, "peerDependencies": { "react": ">=16.8.0", "react-dom": ">=16.8.0" } }, "sha512-4JX6rEatQEvlmgU80wZyq9RT96HZJa88q8hp0pBd+LrczeDI4o6uA2M+uvxngVHo4Ihr8uibXxH6+70zhAFrVw=="],
 
     "@floating-ui/utils": ["@floating-ui/utils@0.2.10", "", {}, "sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ=="],
+
+    "@fontsource/fugaz-one": ["@fontsource/fugaz-one@5.2.7", "", {}, "sha512-jkzV+HCNQaPWiYRnrxIG8HNv1HrT4ahiEhzh+D1cB5FJw/rbMKR2nE+by0m4SgyReyIB/Dk1SLSI9C4JYK0RQw=="],
+
+    "@fontsource/twinkle-star": ["@fontsource/twinkle-star@5.2.8", "", {}, "sha512-zaurm+x4T/Bl3yO6dZz9hySbH6OUPdDyl9QbP3XYHUj7eZr2ZG64wFyOIhIqdJwc8umUZkWeBa+Q8+A1WIAIGw=="],
+
+    "@gsap/react": ["@gsap/react@2.1.2", "", { "peerDependencies": { "gsap": "^3.12.5", "react": ">=17" } }, "sha512-JqliybO1837UcgH2hVOM4VO+38APk3ECNrsuSM4MuXp+rbf+/2IG2K1YJiqfTcXQHH7XlA0m3ykniFYstfq0Iw=="],
 
     "@hookform/resolvers": ["@hookform/resolvers@5.2.2", "", { "dependencies": { "@standard-schema/utils": "^0.3.0" }, "peerDependencies": { "react-hook-form": "^7.55.0" } }, "sha512-A/IxlMLShx3KjV/HeTcTfaMxdwy690+L/ZADoeaTltLx+CVuzkeVIPuybK3jrRfw7YZnmdKsVVHAlEPIAEUNlA=="],
 

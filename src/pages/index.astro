@@ -1,16 +1,36 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import mainPageImage from '../assets/images/u3629887153_a_stylish_fantasy_world_at_midnight_geometric_abs_49e0ca04-3bd7-4372-a11f-d2bb178a87cb_0.png';
+
 import '../styles/global.css';
 
 import Header from '../components/Header.tsx';
-
+import MainPageAnimation from '../components/MainPageAnimation.tsx';
 ---
 
 <Layout>
+  <img
+    src={mainPageImage.src}
+    width={mainPageImage.width}
+    height={mainPageImage.height}
+    alt="main page image"
+    loading="lazy"
+    class="w-full h-screen fixed -z-10"
+  />
   <Header />
-  <main class="container mx-auto px-4 py-8">
-    <h1 class="text-4xl font-bold mb-4">Welcome to My Astro Site</h1>
-    <p class="text-lg">This is a simple Astro site with a React component.</p>
-  </main>
+  <div class="flex h-screen items-center px-6 text-white">
+    <MainPageAnimation
+      client:load
+      words={[
+        "Creativity",
+        "Robotics",
+        "Education",
+        "Healthcare",
+        "Finance",
+        "Entertainment",
+      ]}
+      hold={1.6}
+      fade={0.45}
+    />
+  </div>
 </Layout>
-
