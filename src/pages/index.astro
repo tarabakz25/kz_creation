@@ -5,32 +5,45 @@ import mainPageImage from '../assets/images/u3629887153_a_stylish_fantasy_world_
 import '../styles/global.css';
 
 import Header from '../components/Header.tsx';
-import MainPageAnimation from '../components/MainPageAnimation.tsx';
+import MainPageAnimation from '../components/Animations/MainPageAnimation.tsx';
+import ScrollFieldAnimation from '../components/Animations/ScrollFieldAnimation.tsx';
 ---
 
 <Layout>
-  <img
-    src={mainPageImage.src}
-    width={mainPageImage.width}
-    height={mainPageImage.height}
-    alt="main page image"
-    loading="lazy"
-    class="w-full h-screen fixed -z-10"
-  />
-  <Header />
-  <div class="flex h-screen items-center px-6 text-white">
-    <MainPageAnimation
-      client:load
-      words={[
-        "Creativity",
-        "Robotics",
-        "Education",
-        "Healthcare",
-        "Finance",
-        "Entertainment",
-      ]}
-      hold={1.6}
-      fade={0.45}
+  <!-- 固定要素: 背景画像とヘッダー -->
+  <Fragment slot="fixed-elements">
+    <img
+      src={mainPageImage.src}
+      width={mainPageImage.width}
+      height={mainPageImage.height}
+      alt="main page image"
+      loading="lazy"
+      class="w-full h-screen fixed -z-10 object-cover object-center"
     />
+    <Header />
+  </Fragment>
+  
+  <ScrollFieldAnimation client:load />
+  
+  <div class="flex flex-col w-full h-screen justify-center px-24">
+    <h3 class="font-fugaz text-white text-xl">My journey...</h3>
+    <div class="flex text-white text-4xl">
+      <MainPageAnimation
+        client:load
+        words={[
+          "Creativity",
+          "Entertainment",
+          "Design",
+        ]}
+        hold={1.6}
+        fade={0.45}
+      />
+    </div>
+  </div>
+  
+  <!-- スクロール用のダミーコンテンツ -->
+  <div class="min-h-screen text-white flex items-center justify-center">
+    <h2 class="text-6xl">Next Section</h2>
   </div>
 </Layout>
+
