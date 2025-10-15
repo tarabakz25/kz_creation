@@ -9,6 +9,7 @@ import Header from '../components/Header.tsx';
 import MainPageAnimation from '../components/Animations/MainPageAnimation.tsx';
 import ScrollFieldAnimation from '../components/Animations/ScrollFieldAnimation.tsx';
 import CircleTextAnimation from '../components/Animations/CircleTextAnimation.tsx';
+import GithubContrib3D from '../components/Animations/GithubContrib3D.tsx';
 ---
 
 <Layout>
@@ -28,7 +29,6 @@ import CircleTextAnimation from '../components/Animations/CircleTextAnimation.ts
   <ScrollFieldAnimation client:load />
   
   <div class="flex flex-col w-full h-screen justify-center px-24">
-    <h3 class="font-fugaz text-white text-4xl mb-2">My journey...</h3>
     <div class="flex text-white text-4xl">
       <MainPageAnimation
         client:load
@@ -44,6 +44,9 @@ import CircleTextAnimation from '../components/Animations/CircleTextAnimation.ts
   </div>
 
   <div class="relative flex flex-col w-full h-screen bg-white overflow-hidden">
-
+    <div class="flex flex-col font-fugaz text-4xl w-full h-screen items-center justify-center">
+      <p>Hello. I'm Kizuki!</p>
+      <GithubContrib3D client:load />
+    </div>
   </div>
 </Layout>

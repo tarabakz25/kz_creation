@@ -4,8 +4,8 @@ import { Hamburger } from './ui/hamburger';
 const MenuItems = [
   { name: 'Home', href: "#home" },
   { name: 'About', href: "#about" },
+  { name: 'Blogs', href: "#blogs" },
   { name: 'Services', href: "#services" },
-  { name: 'Contact', href: "#contact" },
 ];
 
 export default function Header() {

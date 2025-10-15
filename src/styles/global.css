@@ -120,3 +120,30 @@
     @apply bg-background text-foreground;
   }
 }
+
+.blend-invert {
+  mix-blend-mode: difference;
+  color: #fff;
+}
+
+.typing-active::after {
+  content: "";
+  display: inline-block;
+  width: 0.12em;
+  height: 0.85em;
+  margin-left: 0.08em;
+  background: currentColor;
+  animation: typing-caret-blink 0.8s steps(1) infinite;
+  vertical-align: baseline;
+}
+
+@keyframes typing-caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+html.prevent-scroll,
+body.prevent-scroll {
+  overflow: hidden;
+}
