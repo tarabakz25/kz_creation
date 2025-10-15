@@ -1,5 +1,6 @@
 ---
 import SmoothScroll from '../components/SmoothScroll.tsx';
+import Loading from '../components/Loaing.tsx';
 ---
 <!doctype html>
 <html lang="en">
@@ -11,6 +12,7 @@ import SmoothScroll from '../components/SmoothScroll.tsx';
 		<title>Kz Creation</title>
 	</head>
 	<body>
+		<Loading client:load />
 		<!-- 固定要素用のスロット（smooth-wrapperの外側） -->
 		<slot name="fixed-elements" />
 		

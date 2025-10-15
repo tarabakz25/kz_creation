@@ -1,12 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import mainPageImage from '../assets/images/u3629887153_a_stylish_fantasy_world_at_midnight_geometric_abs_49e0ca04-3bd7-4372-a11f-d2bb178a87cb_0.png';
+import MyIcon from '../assets/images/icon2.jpg';
 
 import '../styles/global.css';
 
 import Header from '../components/Header.tsx';
 import MainPageAnimation from '../components/Animations/MainPageAnimation.tsx';
 import ScrollFieldAnimation from '../components/Animations/ScrollFieldAnimation.tsx';
+import CircleTextAnimation from '../components/Animations/CircleTextAnimation.tsx';
 ---
 
 <Layout>
@@ -20,30 +22,28 @@ import ScrollFieldAnimation from '../components/Animations/ScrollFieldAnimation.
       loading="lazy"
       class="w-full h-screen fixed -z-10 object-cover object-center"
     />
-    <Header />
+    <Header client:load />
   </Fragment>
   
   <ScrollFieldAnimation client:load />
   
   <div class="flex flex-col w-full h-screen justify-center px-24">
-    <h3 class="font-fugaz text-white text-xl">My journey...</h3>
+    <h3 class="font-fugaz text-white text-4xl mb-2">My journey...</h3>
     <div class="flex text-white text-4xl">
       <MainPageAnimation
         client:load
         words={[
-          "Creativity",
+          "AI",
           "Entertainment",
-          "Design",
+          "Unconvertional",
         ]}
         hold={1.6}
         fade={0.45}
       />
     </div>
   </div>
-  
-  <!-- スクロール用のダミーコンテンツ -->
-  <div class="min-h-screen text-white flex items-center justify-center">
-    <h2 class="text-6xl">Next Section</h2>
+
+  <div class="relative flex flex-col w-full h-screen bg-white overflow-hidden">
+
   </div>
 </Layout>
-

@@ -46,13 +46,8 @@ const ScrollFieldAnimation: React.FC = () => {
   }, []);
 
   return (
-    <div className="absolute inset-0 pointer-events-none z-40" style={{ height: "200vh" }}>
-      <div
-        ref={circleRef}
-        className="absolute top-[80vh] left-1/2 w-[300px] h-[100px] bg-black rounded-[50%]"
-      />
-    </div>
+    <></>
   );
 };
-
+        
 export default ScrollFieldAnimation;

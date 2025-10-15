@@ -33,7 +33,7 @@ const RotatingTagline: React.FC<Props> = ({
         y: 10,
         position: "absolute",
         left: 0,
-        top: "0.3rem",
+        top: "-0.35rem",
       });
 
       // タイムライン作成
@@ -74,16 +74,16 @@ const RotatingTagline: React.FC<Props> = ({
       className={`flex items-baseline gap-3 text-balance ${className}`}
       style={{ fontFamily: "'Fugaz One', cursive" }}
     >
-      <span className="text-5xl">Technology</span>
-      <span className="text-5xl opacity-70">×</span>
-      <span className="text-5xl">AI</span>
-      <span className="text-5xl opacity-70">×</span>
+      <span className="text-6xl">Technology</span>
+      <span className="text-6xl opacity-70">×</span>
+      <span className="text-6xl">Design</span>
+      <span className="text-6xl opacity-70">×</span>
 
       <span className="relative inline-block min-w-[300px] align-baseline" style={{ height: "1.2em" }}>
         {words.map((word, i) => (
           <span
             key={`word-${i}`}
-            className="rotating-word whitespace-nowrap text-5xl inline-block"
+            className="rotating-word whitespace-nowrap text-6xl inline-block"
           >
             {word}
           </span>
