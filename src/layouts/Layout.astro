@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import CursorSpotlight from '../components/ui/cursor-spotlight';
 ---
 <!doctype html>
 <html lang="en">
@@ -19,6 +20,7 @@ import '../styles/global.css';
 	<body>
 		<!-- 固定要素用のスロット（smooth-wrapperの外側） -->
 		<slot name="fixed-elements" />
+		<CursorSpotlight client:load />
 		
 		<div id="smooth-wrapper">
 			<div id="smooth-content">
