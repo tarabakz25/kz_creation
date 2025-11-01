@@ -116,6 +116,11 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html, body {
+    @apply overflow-x-hidden m-0 p-0;
+    width: 100%;
+    max-width: 100%;
+  }
   body {
     @apply bg-background text-foreground;
   }
@@ -146,4 +151,13 @@
 html.prevent-scroll,
 body.prevent-scroll {
   overflow: hidden;
+}
+
+#smooth-wrapper,
+#smooth-content {
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
