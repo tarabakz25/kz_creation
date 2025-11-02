@@ -7,10 +7,10 @@ const Header: React.FC = () => {
     <header className="fixed top-0 w-full h-24 flex items-center justify-between px-8 z-20">
       <div className="flex items-center">
         <a href="#">
-          <img src={titleImage} alt="title image" className="w-48" />
+          <img src={titleImage} alt="title image" className="h-10" />
         </a>
       </div>
-      <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center text-[#FCFCFC] font-fugaz text-3xl gap-12">
+      <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center text-[#FCFCFC] font-futura font-regular text-xl gap-12">
         <a href="">Profile</a>
         <a href="">Activity</a>
         <a href="">Notes</a>
