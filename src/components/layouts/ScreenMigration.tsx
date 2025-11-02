@@ -20,8 +20,16 @@ const ScreenMigration: React.FC<ScreenMigrationProps> = ({ onFadeInComplete, onF
   const [isAnimating, setIsAnimating] = useState(true);
   const [cols, setCols] = useState(0);
   const [rows, setRows] = useState(0);
+  const onFadeInCompleteRef = useRef(onFadeInComplete);
+  const onFadeOutCompleteRef = useRef(onFadeOutComplete);
   
   const CELL_SIZE = 40;
+
+  // コールバックをrefに保存（useEffectの依存配列から除外するため）
+  useEffect(() => {
+    onFadeInCompleteRef.current = onFadeInComplete;
+    onFadeOutCompleteRef.current = onFadeOutComplete;
+  }, [onFadeInComplete, onFadeOutComplete]);
 
   // ウィンドウサイズを計算してcols/rowsを設定
   useEffect(() => {
@@ -72,7 +80,7 @@ const ScreenMigration: React.FC<ScreenMigrationProps> = ({ onFadeInComplete, onF
         });
         setIsAnimating(false);
         // フェードイン完了を即座に通知
-        onFadeInComplete?.();
+        onFadeInCompleteRef.current?.();
         // 0.5秒待ってからフェードアウト
         timeoutId = setTimeout(() => {
           startFadeOut();
@@ -101,7 +109,7 @@ const ScreenMigration: React.FC<ScreenMigrationProps> = ({ onFadeInComplete, onF
         fadeInTimeline.eventCallback("onComplete", () => {
           setIsAnimating(false);
           // フェードイン完了を通知
-          onFadeInComplete?.();
+          onFadeInCompleteRef.current?.();
           // フェードイン完了後、0.5秒待ってからフェードアウト
           timeoutId = setTimeout(() => {
             startFadeOut();
@@ -145,12 +153,12 @@ const ScreenMigration: React.FC<ScreenMigrationProps> = ({ onFadeInComplete, onF
               // フラグをクリア
               sessionStorage.removeItem('showMigration');
               // フェードアウト完了を通知
-              onFadeOutComplete?.();
+              onFadeOutCompleteRef.current?.();
             }
           });
         } else {
           sessionStorage.removeItem('showMigration');
-          onFadeOutComplete?.();
+          onFadeOutCompleteRef.current?.();
         }
       });
     };
@@ -175,7 +183,7 @@ const ScreenMigration: React.FC<ScreenMigrationProps> = ({ onFadeInComplete, onF
       }
     };
 
-  }, [cols, rows, onFadeInComplete, onFadeOutComplete, skipFadeIn]);
+  }, [cols, rows, skipFadeIn]);
 
   if (cols === 0 || rows === 0) {
     return (
