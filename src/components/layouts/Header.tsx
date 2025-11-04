@@ -3,7 +3,7 @@ import { FaXTwitter, FaGithub } from 'react-icons/fa6';
 import titleImage from '~/assets/kz_creation.svg?url';
 import noteIcon from '~/assets/note.svg?url';
 
-type Page = 'home' | 'profile' | 'activity' | 'blog';
+type Page = 'home' | 'profile' | 'activity' | 'notes';
 
 interface HeaderProps {
   onPageChange: (page: Page) => void;
@@ -28,7 +28,7 @@ const Header: React.FC<HeaderProps> = ({ onPageChange, currentPage }) => {
       <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center text-[#FCFCFC] font-futura font-regular text-xl gap-12">
         <a href="#" onClick={(e) => handleLinkClick(e, 'profile')}>Profile</a>
         <a href="#" onClick={(e) => handleLinkClick(e, 'activity')}>Activity</a>
-        <a href="#" onClick={(e) => handleLinkClick(e, 'blog')}>Notes</a>
+        <a href="#" onClick={(e) => handleLinkClick(e, 'notes')}>Notes</a>
       </div>
       <div className="flex items-center justify-center gap-6">
         <a 

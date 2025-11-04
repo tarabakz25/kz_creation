@@ -17,12 +17,18 @@ interface LoadingContentProps {
 const Loading: React.FC<LoadingContentProps> = ({ onComplete }) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const onCompleteRef = useRef(onComplete);
   const [isAnimating, setIsAnimating] = useState(true);
   const [cols, setCols] = useState(0);
   const [rows, setRows] = useState(0);
   
   const GRID_SIZE = 24;
   const CELL_SIZE = 40;
+
+  // onCompleteをrefで保持（依存配列の問題を回避）
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
 
   // ウィンドウサイズを計算してcols/rowsを設定
   useEffect(() => {
@@ -118,7 +124,7 @@ const Loading: React.FC<LoadingContentProps> = ({ onComplete }) => {
       }
     };
 
-  }, [cols, rows, onComplete]);
+  }, [cols, rows]);
 
   if (cols === 0 || rows === 0) {
     return (

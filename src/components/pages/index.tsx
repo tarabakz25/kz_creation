@@ -4,22 +4,32 @@ import Header from '../layouts/Header';
 import Footer from '../layouts/Footer';
 import Loading from '../layouts/Loading';
 import ScreenMigration from '../layouts/ScreenMigration';
+import Home from './Home';
 import Profile from './Profile';
 import Activity from './Activity';
-import Blog from './Blog';
+import Notes from './Notes';
 
-type Page = 'home' | 'profile' | 'activity' | 'blog';
+type Page = 'home' | 'profile' | 'activity' | 'notes';
 
 export default function IndexContent() {
-  // 初回アクセスかどうかをチェック
-  const hasVisited = typeof window !== 'undefined' && sessionStorage.getItem('hasVisited') === 'true';
-  const [isLoading, setIsLoading] = useState(!hasVisited);
+  // SSRとクライアント側で一貫性を保つため、初期状態は常にtrue（ローディング表示）
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasVisited, setHasVisited] = useState(false);
   const [justFinishedLoading, setJustFinishedLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState<Page>('home');
   const [isMigrating, setIsMigrating] = useState(false);
   const [nextPage, setNextPage] = useState<Page | null>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const pageContentRef = useRef<HTMLDivElement>(null);
+
+  // クライアント側でのみhasVisitedをチェック
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const visited = sessionStorage.getItem('hasVisited') === 'true';
+      setHasVisited(visited);
+      setIsLoading(!visited);
+    }
+  }, []);
 
   // サイトを離れる時にフラグをクリア
   useEffect(() => {
@@ -137,17 +147,13 @@ export default function IndexContent() {
   const renderPageContent = () => {
     switch (currentPage) {
       case 'home':
-        return (
-          <div className="w-full h-screen flex items-center p-12 text-[#fcfcfc] font-futura text-3xl">
-            <h1>I'm a seeker who thrives in chaotic times!</h1>
-          </div>
-        );
+        return <Home />;
       case 'profile':
         return <Profile />;
       case 'activity':
         return <Activity />;
-      case 'blog':
-        return <Blog />;
+      case 'notes':
+        return <Notes />;
       default:
         return null;
     }
