@@ -1,92 +1,76 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaArrowUpRightFromSquare, FaTag } from 'react-icons/fa6';
 
-interface NoteEntry {
-  id: string;
+type Article = {
   title: string;
-  date: string;
-  summary: string;
-  tags: string[];
-  link?: string;
+  url: string;
+  publishedAt?: string;
 }
 
-const notes: NoteEntry[] = [
-  {
-    id: 'note-2024-09-23',
-    title: 'Astro 4への移行で得られた知見',
-    date: '2024-09-23',
-    summary: 'Astro 4へ移行する際にハマった点と、React Islandsを安定させるために行った調整を振り返ります。',
-    tags: ['Astro', 'React', 'DX'],
-    link: 'https://note.com/kz25_01/n/n1234567890ab',
-  },
-  {
-    id: 'note-2024-07-12',
-    title: 'LLMとデザインの協調ワークフロー',
-    date: '2024-07-12',
-    summary: 'FigmaとLLMを併用してUIプロトタイピングを高速化したプロセスを整理しました。',
-    tags: ['LLM', 'Figma', 'Workflow'],
-    link: 'https://note.com/kz25_01/n/n0987654321cd',
-  },
-  {
-    id: 'note-2024-04-01',
-    title: '競プロ視点で見るRustの魅力',
-    date: '2024-04-01',
-    summary: 'Rustを競技プログラミングで活用するメリットと、習得時に役立ったリソースを整理しています。',
-    tags: ['Rust', 'Competitive Programming'],
-  },
-];
-
 const Notes: React.FC = () => {
+  const [items, setItems] = useState<Article[]>([]);
+  const [err, setErr] = useState<string | null>(null);
+
+  useEffect(() => {
+    let aborted = false;
+    (async () => {
+      try {
+        const r = await fetch('/api/articles.json', { credentials: "same-origin" });
+        if (!r.ok) {
+          const errorData = await r.json().catch(() => ({ error: `HTTP ${r.status}` }));
+          if (!aborted) {
+            setItems([]);
+            setErr(errorData.error || `Failed to load articles (${r.status})`);
+          }
+          return;
+        }
+        
+        const j = await r.json();
+        console.log('API Response:', j); // デバッグ用
+
+        if (aborted) return;
+        if (j?.items && Array.isArray(j.items)) {
+          setItems(j.items);
+          setErr(null);
+        } else {
+          setItems([]);
+          setErr(j?.error || '記事データが見つかりませんでした');
+        }
+      } catch (e) {
+        if (!aborted) {
+          console.error('Fetch error:', e);
+          setItems([]);
+          setErr(e instanceof Error ? e.message : 'An error occurred while fetching articles');
+        }
+      }
+    })();
+
+    return () => {
+      aborted = true;
+    }
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white p-8 pt-32">
-      <div className="max-w-4xl mx-auto">
-        <header className="space-y-4">
-          <h1 className="text-5xl font-bold">Notes</h1>
-          <p className="text-gray-300 text-lg">
-            個人的な学びや実験の記録です。現場での試行錯誤から得た知見を中心にまとめています。
-          </p>
-        </header>
-
-        <section className="mt-12 space-y-8">
-          {notes.map((note) => (
-            <article
-              key={note.id}
-              className="bg-gray-800/80 backdrop-blur rounded-2xl border border-gray-800 shadow-lg hover:border-gray-700 transition-colors duration-300 p-8"
-            >
-              <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400">
-                <time dateTime={note.date} className="uppercase tracking-widest">
-                  {note.date}
-                </time>
-                <div className="flex flex-wrap items-center gap-2">
-                  {note.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="inline-flex items-center gap-2 bg-gray-800/80 px-3 py-1 rounded-full"
-                    >
-                      <FaTag className="text-xs" />
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <h2 className="mt-6 text-3xl font-semibold text-white">{note.title}</h2>
-              <p className="mt-4 text-gray-300 leading-relaxed">{note.summary}</p>
-
-              {note.link && (
-                <a
-                  href={note.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-cyan-300 hover:text-cyan-200 transition-colors"
-                >
-                  続きを読む
-                  <FaArrowUpRightFromSquare className="text-xs" />
-                </a>
-              )}
-            </article>
-          ))}
-        </section>
+    <div className="mx-auto max-w-2xl h-screen p-4 flex items-center justify-center">
+      {err && (
+        <div className="mb-3 p-3 bg-red-50 border border-red-200 rounded text-red-700 text-sm">
+          {err}
+        </div>
+      )}
+      {items.length === 0 && !err && (
+        <div className="text-sm text-gray-500">Loading...</div>
+      )}
+      <div className="flex flex-col gap-4">
+        {items.map((it, i) => (
+          <a href={it.url} target="_blank" rel="noopener noreferrer" className="border rounded-xl p-3 flex flex-col gap-2">
+            <h1 className="main-fg">{it.title}</h1>
+            {it.publishedAt ? (
+              <span className="text-xs font-eurostile main-fg">
+                {new Date(it.publishedAt).toLocaleDateString("ja-JP")}
+              </span>
+            ) : null}
+          </a>
+        ))}
       </div>
     </div>
   );

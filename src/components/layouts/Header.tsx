@@ -1,27 +1,9 @@
-import React, { useState } from 'react';
-import { FaXTwitter, FaGithub } from 'react-icons/fa6';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
+'use client';
+
+import React, { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
 import titleImage from '~/assets/kz_creation.svg?url';
-import noteIcon from '~/assets/note.svg?url';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from '~/components/ui/dialog';
-import { Button } from '~/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '~/components/ui/form';
-import { Input } from '~/components/ui/input';
-import { Textarea } from '~/components/ui/textarea';
+import ContactDialog from './ContactDialog';
 
 type Page = 'home' | 'profile' | 'activity' | 'notes';
 
@@ -30,157 +12,149 @@ interface HeaderProps {
   currentPage: Page;
 }
 
-const contactFormSchema = z.object({
-  name: z.string().min(1, '名前を入力してください'),
-  email: z.string().email('有効なメールアドレスを入力してください'),
-  message: z.string().min(1, 'メッセージを入力してください'),
-});
+interface HoverCornerButtonProps {
+  children: React.ReactNode;
+  onClick?: () => void;
+  className?: string;
+}
 
-type ContactFormValues = z.infer<typeof contactFormSchema>;
+const HoverCornerButton: React.FC<HoverCornerButtonProps> = ({ children, onClick, className }) => {
+  const containerRef = useRef<HTMLButtonElement>(null);
+  const topLeftRef = useRef<HTMLDivElement>(null);
+  const bottomRightRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const topLeft = topLeftRef.current;
+    const bottomRight = bottomRightRef.current;
+
+    if (!container || !topLeft || !bottomRight) return;
+
+    gsap.set(topLeft, { opacity: 0, x: 0, y: 0 });
+    gsap.set(bottomRight, { opacity: 0, x: 0, y: 0 });
+
+    const handleMouseEnter = () => {
+      gsap.killTweensOf([topLeft, bottomRight]);
+
+      gsap.to(topLeft, {
+        opacity: 1,
+        x: -4,
+        y: -4,
+        duration: 0.25,
+        ease: 'power2.out',
+        overwrite: 'auto',
+      });
+
+      gsap.to(bottomRight, {
+        opacity: 1,
+        x: 4,
+        y: 4,
+        duration: 0.25,
+        ease: 'power2.out',
+        overwrite: 'auto',
+      });
+    };
+
+    const handleMouseLeave = () => {
+      gsap.killTweensOf([topLeft, bottomRight]);
+
+      gsap.to(topLeft, {
+        opacity: 0,
+        x: 2,
+        y: 2,
+        duration: 0.15,
+        ease: 'power2.in',
+        overwrite: 'auto',
+      });
+
+      gsap.to(bottomRight, {
+        opacity: 0,
+        x: -2,
+        y: -2,
+        duration: 0.15,
+        ease: 'power2.in',
+        overwrite: 'auto',
+      });
+    };
+
+    container.addEventListener('mouseenter', handleMouseEnter);
+    container.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      container.removeEventListener('mouseenter', handleMouseEnter);
+      container.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+
+  return (
+    <button
+      ref={containerRef}
+      onClick={onClick}
+      type="button"
+      className={`relative inline-flex items-center justify-center bg-transparent px-4 py-2 text-[#FCFCFC] font-eurostile font-regular text-xl transition-colors duration-300 hover:text-[#E5E5E5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E5E5E5] ${className ?? ''}`}
+    >
+      <div
+        ref={topLeftRef}
+        className="pointer-events-none absolute left-0 top-0"
+        style={{ opacity: 0 }}
+      >
+        <div className="h-0.5 w-3 bg-current" />
+        <div className="h-3 w-0.5 bg-current" />
+      </div>
+      <div
+        ref={bottomRightRef}
+        className="pointer-events-none absolute bottom-0 right-0"
+        style={{ opacity: 0 }}
+      >
+        <div className="absolute bottom-0 right-0 h-0.5 w-3 bg-current" />
+        <div className="absolute bottom-0 right-0 h-3 w-0.5 bg-current" />
+      </div>
+      <span className="relative z-10">{children}</span>
+    </button>
+  );
+};
 
 const Header: React.FC<HeaderProps> = ({ onPageChange, currentPage }) => {
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
 
-  const form = useForm<ContactFormValues>({
-    resolver: zodResolver(contactFormSchema),
-    defaultValues: {
-      name: '',
-      email: '',
-      message: '',
-    },
-  });
-
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, page: Page) => {
-    e.preventDefault();
+  const handlePageChange = (page: Page) => {
     if (currentPage !== page) {
       onPageChange(page);
     }
-  };
-
-  const onSubmit = (data: ContactFormValues) => {
-    console.log('Contact form submitted:', data);
-    // ここでフォーム送信処理を実装
-    // 例: APIへのPOSTリクエストなど
-    alert('お問い合わせありがとうございます！');
-    form.reset();
-    setIsContactDialogOpen(false);
   };
 
   return (
     <>
       <header className="fixed top-0 w-full h-24 flex items-center justify-between px-8 z-20">
         <div className="flex items-center">
-          <a href="#" onClick={(e) => handleLinkClick(e, 'home')}>
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              handlePageChange('home');
+            }}
+          >
             <img src={titleImage} alt="title image" className="h-10" />
           </a>
         </div>
         <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center text-[#FCFCFC] font-eurostile font-regular text-xl gap-12">
-          <a href="#" onClick={(e) => handleLinkClick(e, 'profile')}>Profile</a>
-          <a href="#" onClick={(e) => handleLinkClick(e, 'activity')}>Activity</a>
-          <a href="#" onClick={(e) => handleLinkClick(e, 'notes')}>Notes</a>
+          <HoverCornerButton onClick={() => handlePageChange('profile')} className="px-2 py-2">
+            Profile
+          </HoverCornerButton>
+          <HoverCornerButton onClick={() => handlePageChange('activity')} className="px-2 py-2">
+            Activity
+          </HoverCornerButton>
+          <HoverCornerButton onClick={() => handlePageChange('notes')} className="px-2 py-2">
+            Notes
+          </HoverCornerButton>
         </div>
         <div className="flex items-center justify-center">
-          <button
-            onClick={() => setIsContactDialogOpen(true)}
-            className="text-[#FCFCFC] font-eurostile font-regular text-xl">
+          <HoverCornerButton onClick={() => setIsContactDialogOpen(true)} className="px-8 py-4">
             Contact Me!
-          </button>
+          </HoverCornerButton>
         </div>
       </header>
-
-      <Dialog open={isContactDialogOpen} onOpenChange={setIsContactDialogOpen}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-[#101010] main-fg">
-          <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-center font-eurostile">Contact Me</DialogTitle>
-          </DialogHeader>
-
-          {/* SNS Links Section */}
-          <div className="flex flex-col items-center gap-4 py-6 border-b">
-            <div className="flex items-center justify-center gap-6">
-              <a 
-                href="https://twitter.com/kz25_kmc/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="hover:opacity-70 transition-opacity"
-              >
-                <FaXTwitter className="text-3xl" />
-              </a>
-              <a 
-                href="https://github.com/tarabakz25/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:opacity-70 transition-opacity"
-              >
-                <FaGithub className="text-3xl" />
-              </a>
-              <a 
-                href="https://note.com/kz25_01"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:opacity-70 transition-opacity"
-              >
-                <img src={noteIcon} alt="note icon" className="h-8 w-auto" />
-              </a>
-            </div>
-          </div>
-
-          {/* Contact Form Section */}
-          <div className="py-6 font-eurostile">
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Kizuki Aiki" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <FormControl>
-                        <Input type="email" placeholder="example@email.com" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Message</FormLabel>
-                      <FormControl>
-                        <Textarea 
-                          placeholder="Message content..." 
-                          className="min-h-32"
-                          {...field} 
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <div className="flex justify-center gap-4">
-                  <Button type="submit" className="mx-16 bg-[#252525] hover:bg-[#252525] transition-scale hover:scale-105">
-                    SEND A MESSAGE
-                  </Button>
-                </div>
-              </form>
-            </Form>
-          </div>
-        </DialogContent>
-      </Dialog>
+      <ContactDialog open={isContactDialogOpen} onOpenChange={setIsContactDialogOpen} />
     </>
   )
 }
