@@ -167,3 +167,15 @@ body.prevent-scroll {
 .font-futura {
   font-family: "futura-pt", "Futura", "Futura PT", "futura-pt-n7", "futura-pt-n4", sans-serif;
 }
+
+.main-bg {
+  background: #121212;
+}
+
+.main-fg{
+  color: #fcfcfc;
+}
+
+.main-fg-bg {
+  background-color: #fcfcfc;
+}

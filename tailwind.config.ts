@@ -5,10 +5,12 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-sans)', 'ui-sans-serif', 'system-ui'],
         fugaz: ['"Fugaz One"', 'sans-serif'],
-        mono: ['"Fira Mono"', 'monospace'],
-        futura: ['"futura-pt"', '"Futura"', '"Futura PT"', 'futura-pt-n7', 'futura-pt-n4', 'sans-serif'],
+        fira: ['"Fira Mono"', 'monospace'],
+        futura: ['"Futura 100"', 'sans-serif'],
+        comma: ['"Comma Sans"', 'sans-serif'],
+        eurostile: ['eurostile', 'sans-serif'],
+        eurostile_cond: ['eurostile-condensed', 'sans-serif'],
       }
     }
   },

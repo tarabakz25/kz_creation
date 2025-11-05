@@ -209,7 +209,7 @@ const ScreenMigration: React.FC<ScreenMigrationProps> = ({ onFadeInComplete, onF
           <div
             key={index}
             data-migration-cell-id={index}
-            className="bg-[#fcfcfc]"
+            className="main-fg-bg"
             style={{
               opacity: skipFadeIn ? 1 : 0,
               willChange: "opacity",

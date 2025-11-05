@@ -25,7 +25,7 @@ const Header: React.FC<HeaderProps> = ({ onPageChange, currentPage }) => {
           <img src={titleImage} alt="title image" className="h-10" />
         </a>
       </div>
-      <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center text-[#FCFCFC] font-futura font-regular text-xl gap-12">
+      <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center text-[#FCFCFC] font-eurostile font-regular text-xl gap-12">
         <a href="#" onClick={(e) => handleLinkClick(e, 'profile')}>Profile</a>
         <a href="#" onClick={(e) => handleLinkClick(e, 'activity')}>Activity</a>
         <a href="#" onClick={(e) => handleLinkClick(e, 'notes')}>Notes</a>

@@ -13,19 +13,19 @@ const awards = [
 
 const Profile: React.FC = () => {
   return (
-    <div className="h-screen w-full flex flex-col bg-[#252525] items-center justify-center gap-16 ">
+    <div className="h-screen w-full flex flex-col main-bg items-center justify-center gap-16 ">
       <div className="w-full flex items-center justify-center gap-8">
         <img src={ProfileIcon} alt="profile icon" className="w-48 h-48 object-cover rounded-3xl" />
-        <div className="flex flex-col text-[#fcfcfc] font-futura gap-2">
-          <h1 className="text-3xl">Kizuki Aiki</h1>
-          <h2 className="text-xl font-light">Web Engineering, UI/UX Design and AI/LLM Coding</h2>
+        <div className="flex flex-col main-fg gap-2">
+          <h1 className="text-3xl font-futura">Kizuki Aiki</h1>
+          <h2 className="text-xl font-eurostile tracking-widest">Web Engineering, UI/UX Design and AI/LLM Coding</h2>
         </div>
       </div>
       <div className="w-full flex flex-col items-center">
-        <h3 className="text-2xl font-futura text-[#fcfcfc]">My main tools</h3>
+        <h3 className="text-2xl font-futura main-fg">My main tools</h3>
         <div className="w-full flex items-center justify-center gap-4 flex-wrap mt-4 px-8">
           {tools.map((tool) => (
-            <div key={tool} className="flex items-center gap-2 bg-[#353535] text-[#fcfcfc] px-4 py-2 rounded-lg font-futura text-lg">
+            <div key={tool} className="flex items-center gap-2 bg-[#353535] main-fg px-4 py-2 rounded-lg font-eurostile tracking-widest text-lg">
               <FaTag />
               <span>{tool}</span>
             </div>
@@ -33,10 +33,10 @@ const Profile: React.FC = () => {
         </div>
       </div>
       <div className="w-full flex flex-col items-center justify-center gap-4 flex-wrap">
-        <h3 className="text-2xl font-futura text-[#fcfcfc]">Awards & Recognitions</h3>
+        <h3 className="text-2xl font-futura main-fg">Awards & Recognitions</h3>
         <div className="w-full flex flex-col items-center justify-center gap-4 mt-4 px-8">
           {awards.map((award, index) => (
-            <div key={index} className="flex items-center gap-2 bg-[#353535] text-[#fcfcfc] px-4 py-2 rounded-lg font-futura text-lg">
+            <div key={index} className="flex items-center gap-2 bg-[#353535] main-fg px-4 py-2 rounded-lg font-eurostile tracking-wider text-lg">
               <FaTag />
               <span>{award}</span>
             </div>

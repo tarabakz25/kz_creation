@@ -128,7 +128,7 @@ const Loading: React.FC<LoadingContentProps> = ({ onComplete }) => {
 
   if (cols === 0 || rows === 0) {
     return (
-      <div className="relative w-full h-screen overflow-hidden bg-[#252525]" ref={contentRef}>
+      <div className="relative w-full h-screen overflow-hidden main-bg" ref={contentRef}>
         <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none">
           <img src={titleTextImage} alt="Loading..." className="w-64 h-auto" />
         </div>
@@ -137,7 +137,7 @@ const Loading: React.FC<LoadingContentProps> = ({ onComplete }) => {
   }
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-[#252525]" ref={contentRef}>
+    <div className="relative w-full h-screen overflow-hidden main-bg" ref={contentRef}>
       <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none">
         <img src={titleTextImage} alt="Loading..." className="w-64 h-auto" />
       </div>
@@ -157,7 +157,7 @@ const Loading: React.FC<LoadingContentProps> = ({ onComplete }) => {
           <div
             key={index}
             data-cell-id={index}
-            className="bg-[#fcfcfc]"
+            className="main-fg-bg"
             style={{
               opacity: 1,
               willChange: "opacity",

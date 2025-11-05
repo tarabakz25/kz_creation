@@ -169,7 +169,7 @@ export default function IndexContent() {
   };
 
   return (
-    <div className="w-full h-screen flex flex-col bg-[#252525] overflow-hidden">
+    <div className="w-full h-screen flex flex-col main-bg overflow-hidden">
       {isLoading ? (
         <Loading onComplete={handleLoadingComplete} />
       ) : (
