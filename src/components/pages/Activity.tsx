@@ -91,20 +91,17 @@ export default function Activity() {
 
     // ホイールイベント
     const handleWheel = (e: WheelEvent) => {
-      // カーソル位置に依存せず常にタイムラインをスクロール
       e.preventDefault();
-      const rawDelta = (typeof e.deltaY === 'number') ? e.deltaY : 0;
-      const delta = rawDelta === 0 && (e as any).wheelDelta ? -(e as any).wheelDelta : rawDelta;
-      scrollPositionRef.current = Math.max(0, Math.min(maxScroll, scrollPositionRef.current + delta * 0.5));
+      scrollPositionRef.current = Math.max(0, Math.min(maxScroll, scrollPositionRef.current + e.deltaY * 0.5));
       updateItems();
     };
 
-    window.addEventListener("wheel", handleWheel, { passive: false });
+    container.addEventListener("wheel", handleWheel, { passive: false });
 
     updateItems();
 
     return () => {
-      window.removeEventListener("wheel", handleWheel);
+      container.removeEventListener("wheel", handleWheel);
     };
   }, []);
 
