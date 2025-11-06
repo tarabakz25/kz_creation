@@ -91,17 +91,28 @@ export default function Activity() {
 
     // ホイールイベント
     const handleWheel = (e: WheelEvent) => {
+      const rect = container.getBoundingClientRect();
+      const withinBounds =
+        e.clientX >= rect.left &&
+        e.clientX <= rect.right &&
+        e.clientY >= rect.top &&
+        e.clientY <= rect.bottom;
+
+      if (!withinBounds) {
+        return;
+      }
+
       e.preventDefault();
       scrollPositionRef.current = Math.max(0, Math.min(maxScroll, scrollPositionRef.current + e.deltaY * 0.5));
       updateItems();
     };
 
-    container.addEventListener("wheel", handleWheel, { passive: false });
+    window.addEventListener("wheel", handleWheel, { passive: false });
 
     updateItems();
 
     return () => {
-      container.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("wheel", handleWheel);
     };
   }, []);
 
@@ -117,10 +128,10 @@ export default function Activity() {
             className="absolute left-0 right-0 will-change-transform"
           >
             <div className="mb-8 p-6 main-fg transform-gpu" style={{ height: '180px' }}>
-              <div className="text-sm mb-1">
+              <div className="text-sm mb-1 font-futura">
                 {item.date} {item.period && ` - ${item.period}`}
               </div>
-              <div className="text-lg font-semibold mb-2">{item.title}</div>
+              <div className="text-2xl font-semibold mb-2 font-eurostile">{item.title}</div>
               {item.description && (
                 <div className="mb-2">{item.description}</div>
               )}
@@ -129,9 +140,9 @@ export default function Activity() {
                   {item.tags.map((tag, tagIndex) => (
                     <span
                       key={tagIndex}
-                      className="text-xs px-2 py-1 rounded-full"
+                      className="text-xs px-2 py-1 font-futura"
                     >
-                      {tag}
+                      # {tag}
                     </span>
                   ))}
                 </div>
