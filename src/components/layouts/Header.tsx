@@ -5,7 +5,7 @@ import gsap from 'gsap';
 import titleImage from '~/assets/kz_creation.svg?url';
 import ContactDialog from './ContactDialog';
 
-type Page = 'home' | 'profile' | 'activity' | 'notes';
+type Page = 'home' | 'profile' | 'activity' | 'works';
 
 interface HeaderProps {
   onPageChange: (page: Page) => void;
@@ -144,8 +144,8 @@ const Header: React.FC<HeaderProps> = ({ onPageChange, currentPage }) => {
           <HoverCornerButton onClick={() => handlePageChange('activity')} className="px-2 py-2">
             Activity
           </HoverCornerButton>
-          <HoverCornerButton onClick={() => handlePageChange('notes')} className="px-2 py-2">
-            Notes
+          <HoverCornerButton onClick={() => handlePageChange('works')} className="px-2 py-2">
+            Works
           </HoverCornerButton>
         </div>
         <div className="flex items-center justify-center">

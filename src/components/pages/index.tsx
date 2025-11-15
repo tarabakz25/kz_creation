@@ -9,9 +9,9 @@ import MotionBackground from '../layouts/MotionBackground';
 import Home from './Home';
 import Profile from './Profile';
 import Activity from './Activity';
-import Notes from './Notes';
+import Works from './Works';
 
-type Page = 'home' | 'profile' | 'activity' | 'notes';
+type Page = 'home' | 'profile' | 'activity' | 'works';
 
 export default function IndexContent() {
   // SSRとクライアント側で一貫性を保つため、初期状態は常にtrue（ローディング表示）
@@ -154,8 +154,8 @@ export default function IndexContent() {
         return <Profile />;
       case 'activity':
         return <Activity />;
-      case 'notes':
-        return <Notes />;
+      case 'works':
+        return <Works />;
       default:
         return null;
     }

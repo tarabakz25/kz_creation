@@ -1,7 +1,9 @@
 import React from 'react';
 import { FiAward } from "react-icons/fi";
+import { FaXTwitter, FaGithub } from 'react-icons/fa6';
 
 import {
+  PolarGrid,
   PolarAngleAxis,
   PolarRadiusAxis,
   Radar,
@@ -54,7 +56,7 @@ const toolCategories: ToolCategory[] = [
 ];
 
 const awards = [
-  "Kosen Programming Contest 2025 Competitive Programming Division  - 3rd place in the semifinals",
+  "Kosen Programming Contest 2025 Competitive Division  - 3rd place in the semifinals",
   "TwoGate DevCamp 2024 - TwoGate Award",
 ]
 
@@ -86,6 +88,14 @@ const Profile: React.FC = () => {
         <div className="flex flex-col main-fg gap-2">
           <h1 className="text-3xl font-futura">Kizuki Aiki</h1>
           <h2 className="text-xl font-eurostile tracking-widest">Web Engineering, UI/UX Design and AI/LLM Coding</h2>
+          <div className="flex gap-2 pt-2">
+            <a href="https://x.com/kz25_kmc">
+              <FaXTwitter className="inline-block mr-2 w-6 h-auto" />
+            </a>
+            <a href="https://github.com/tarabakz25/">
+              <FaGithub className="inline-block mr-2 w-6 h-auto" />
+            </a>
+          </div>  
         </div>
       </div>
       <div className="w-full flex flex-nowrap items-start justify-center gap-12 overflow-x-auto pb-4 main-fg">
@@ -111,6 +121,7 @@ const Profile: React.FC = () => {
                     outerRadius="70%"
                     margin={{ top: 52, right: 16, bottom: 16, left: 16 }}
                   >
+                    <PolarGrid />
                     <PolarAngleAxis
                       dataKey="tool"
                       tick={{
