@@ -3,7 +3,8 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
-interface ActivityItem {
+export interface ActivityItem {
+  id: string;
   date: string;
   period?: string;
   title: string;
@@ -11,39 +12,11 @@ interface ActivityItem {
   tags?: string[];
 }
 
-const activityItems: ActivityItem[] = [
-  {
-    date: 'Apr 2023',
-    title: 'Enrollment at Kamiyama Marugoto College of Technology',
-  },
-  {
-    date: 'Oct 2023',
-    title: 'Kosen Programming Contest 2023 Free Category Finals Participation',
-    tags: ['contest'],
-  },
-  {
-    date: 'Aug 2024',
-    title: 'TwoGate DevCamp 2024 Summer - TwoGate Award',
-    tags: ['hackathon'],
-  },
-  {
-    date: 'Oct 2024',
-    title: 'Kosen Programming Contest 2024 Competitive Category Finals Participation',
-    tags: ['contest'],
-  },
-  {
-    date: 'Jan 2025',
-    title: 'Kamiyama Marugoto College of Technology In-House Hackathon - Special Award',
-    tags: ['hackathon'],
-  },
-  {
-    date: 'Jun 2025',
-    title: 'Participating in the Hack1 Grand Prix 2025',
-    tags: ['hackathon'],
-  },
-];
+type ActivityProps = {
+  items: ActivityItem[];
+};
 
-export default function Activity() {
+export default function Activity({ items }: ActivityProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<HTMLDivElement[]>([]);
   const scrollPositionRef = useRef(0);
@@ -52,13 +25,13 @@ export default function Activity() {
     if (!containerRef.current) return;
 
     const container = containerRef.current;
-    const items = itemsRef.current;
+    const renderedItems = itemsRef.current;
     const itemHeight = 200; // 各アイテムの高さ
     const baseOffset = container.clientHeight / 2 - itemHeight / 2;
-    const maxScroll = (items.length - 1) * itemHeight;
+    const maxScroll = Math.max(0, (renderedItems.length - 1) * itemHeight);
 
     // 初期位置の設定
-    items.forEach((item, index) => {
+    renderedItems.forEach((item, index) => {
       gsap.set(item, {
         y: index * itemHeight + baseOffset,
         scale: 0.85,
@@ -70,7 +43,7 @@ export default function Activity() {
     const updateItems = () => {
       const centerY = container.clientHeight / 2;
 
-      items.forEach((item, index) => {
+      renderedItems.forEach((item, index) => {
         const itemY = index * itemHeight - scrollPositionRef.current + baseOffset;
         const distanceFromCenter = Math.abs(centerY - (itemY + itemHeight / 2));
         const maxDistance = container.clientHeight / 2;
@@ -81,8 +54,8 @@ export default function Activity() {
 
         gsap.to(item, {
           y: itemY,
-          scale: scale,
-          opacity: opacity,
+          scale,
+          opacity,
           duration: 0.3,
           ease: "power2.out",
         });
@@ -92,7 +65,10 @@ export default function Activity() {
     // ホイールイベント
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
-      scrollPositionRef.current = Math.max(0, Math.min(maxScroll, scrollPositionRef.current + e.deltaY * 0.5));
+      scrollPositionRef.current = Math.max(
+        0,
+        Math.min(maxScroll, scrollPositionRef.current + e.deltaY * 0.5)
+      );
       updateItems();
     };
 
@@ -103,14 +79,14 @@ export default function Activity() {
     return () => {
       container.removeEventListener("wheel", handleWheel);
     };
-  }, []);
+  }, [items.length]);
 
   return (
     <div ref={containerRef} className="mx-auto max-w-2xl h-screen p-4 overflow-hidden select-none relative">
       <div className="relative h-full">
-        {activityItems.map((item, index) => (
+        {items.map((item, index) => (
           <div
-            key={index}
+            key={item.id}
             ref={(el) => {
               if (el) itemsRef.current[index] = el;
             }}
@@ -124,11 +100,11 @@ export default function Activity() {
               {item.description && (
                 <div className="mb-2">{item.description}</div>
               )}
-              {item.tags && (
+              {item.tags && item.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2">
                   {item.tags.map((tag, tagIndex) => (
                     <span
-                      key={tagIndex}
+                      key={`${item.id}-tag-${tagIndex}`}
                       className="text-xs px-2 py-1 font-futura"
                     >
                       # {tag}

@@ -7,13 +7,18 @@ import ScreenMigration from '../layouts/ScreenMigration';
 import MotionBackground from '../layouts/MotionBackground';
 
 import Home from './Home';
-import Profile from './Profile';
-import Activity from './Activity';
+import Profile, { type ProfileData } from './Profile';
+import Activity, { type ActivityItem } from './Activity';
 import Works from './Works';
 
 type Page = 'home' | 'profile' | 'activity' | 'works';
 
-export default function IndexContent() {
+type IndexContentProps = {
+  profileData: ProfileData;
+  activityItems: ActivityItem[];
+};
+
+export default function IndexContent({ profileData, activityItems }: IndexContentProps) {
   // SSRとクライアント側で一貫性を保つため、初期状態は常にtrue（ローディング表示）
   const [isLoading, setIsLoading] = useState(true);
   const [hasVisited, setHasVisited] = useState(false);
@@ -151,9 +156,9 @@ export default function IndexContent() {
       case 'home':
         return <Home />;
       case 'profile':
-        return <Profile />;
+        return <Profile data={profileData} />;
       case 'activity':
-        return <Activity />;
+        return <Activity items={activityItems} />;
       case 'works':
         return <Works />;
       default:

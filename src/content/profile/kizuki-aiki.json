@@ -1,0 +1,50 @@
+{
+  "name": "Kizuki Aiki",
+  "headline": "Web Engineering, UI/UX Design and AI/LLM Coding",
+  "awards": [
+    "Kosen Programming Contest 2025 Competitive Division - 3rd place in the semifinals",
+    "TwoGate DevCamp 2024 - TwoGate Award"
+  ],
+  "socials": [
+    {
+      "platform": "x",
+      "label": "X",
+      "url": "https://x.com/kz25_kmc"
+    },
+    {
+      "platform": "github",
+      "label": "GitHub",
+      "url": "https://github.com/tarabakz25/"
+    }
+  ],
+  "toolCategories": [
+    {
+      "name": "Frameworks",
+      "items": [
+        { "name": "Next.js", "score": 80 },
+        { "name": "Astro", "score": 80 },
+        { "name": "React", "score": 75 },
+        { "name": "TailwindCSS", "score": 90 }
+      ]
+    },
+    {
+      "name": "Dev Tools",
+      "items": [
+        { "name": "GitHub", "score": 85 },
+        { "name": "Neovim", "score": 70 },
+        { "name": "Cursor", "score": 95 },
+        { "name": "Vercel", "score": 80 },
+        { "name": "AWS", "score": 35 },
+        { "name": "Supabase", "score": 75 }
+      ]
+    },
+    {
+      "name": "Design",
+      "items": [
+        { "name": "Figma", "score": 90 },
+        { "name": "Photoshop", "score": 40 },
+        { "name": "Illustrator", "score": 40 }
+      ]
+    }
+  ]
+}
