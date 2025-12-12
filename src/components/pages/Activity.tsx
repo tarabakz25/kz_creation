@@ -20,13 +20,16 @@ export default function Activity({ items }: ActivityProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<HTMLDivElement[]>([]);
   const scrollPositionRef = useRef(0);
+  const touchStartYRef = useRef<number | null>(null);
+  const touchStartScrollRef = useRef<number>(0);
 
   useEffect(() => {
     if (!containerRef.current) return;
 
     const container = containerRef.current;
     const renderedItems = itemsRef.current;
-    const itemHeight = 200; // 各アイテムの高さ
+    const isMobile = window.innerWidth < 768;
+    const itemHeight = isMobile ? 160 : 200; // モバイルでは少し小さく
     const baseOffset = container.clientHeight / 2 - itemHeight / 2;
     const maxScroll = Math.max(0, (renderedItems.length - 1) * itemHeight);
 
@@ -72,12 +75,44 @@ export default function Activity({ items }: ActivityProps) {
       updateItems();
     };
 
+    // タッチイベント
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches.length === 1) {
+        touchStartYRef.current = e.touches[0].clientY;
+        touchStartScrollRef.current = scrollPositionRef.current;
+      }
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (touchStartYRef.current === null || e.touches.length !== 1) return;
+      
+      e.preventDefault();
+      const touchY = e.touches[0].clientY;
+      const deltaY = touchStartYRef.current - touchY;
+      
+      scrollPositionRef.current = Math.max(
+        0,
+        Math.min(maxScroll, touchStartScrollRef.current + deltaY * 1.2)
+      );
+      updateItems();
+    };
+
+    const handleTouchEnd = () => {
+      touchStartYRef.current = null;
+    };
+
     container.addEventListener("wheel", handleWheel, { passive: false });
+    container.addEventListener("touchstart", handleTouchStart, { passive: false });
+    container.addEventListener("touchmove", handleTouchMove, { passive: false });
+    container.addEventListener("touchend", handleTouchEnd, { passive: false });
 
     updateItems();
 
     return () => {
       container.removeEventListener("wheel", handleWheel);
+      container.removeEventListener("touchstart", handleTouchStart);
+      container.removeEventListener("touchmove", handleTouchMove);
+      container.removeEventListener("touchend", handleTouchEnd);
     };
   }, [items.length]);
 
@@ -92,11 +127,11 @@ export default function Activity({ items }: ActivityProps) {
             }}
             className="absolute left-0 right-0 will-change-transform"
           >
-            <div className="mb-8 p-6 main-fg transform-gpu" style={{ height: '180px' }}>
-              <div className="text-sm mb-1 font-futura">
+            <div className="mb-8 p-4 sm:p-6 main-fg transform-gpu" style={{ minHeight: '140px', height: 'auto' }}>
+              <div className="text-xs sm:text-sm mb-1 font-futura">
                 {item.date} {item.period && ` - ${item.period}`}
               </div>
-              <div className="text-2xl font-semibold mb-2 font-eurostile">{item.title}</div>
+              <div className="text-xl sm:text-2xl font-semibold mb-2 font-eurostile">{item.title}</div>
               {item.description && (
                 <div className="mb-2">{item.description}</div>
               )}

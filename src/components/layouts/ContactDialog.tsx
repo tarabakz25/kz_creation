@@ -56,20 +56,20 @@ const ContactDialog: React.FC<ContactDialogProps> = ({ open, onOpenChange }) => 
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-[#101010] main-fg border-none">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-[#101010] main-fg border-none w-[95vw] sm:w-full">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-center font-eurostile">Contact Me</DialogTitle>
+          <DialogTitle className="text-xl sm:text-2xl font-bold text-center font-eurostile">Contact Me</DialogTitle>
         </DialogHeader>
 
-        <div className="flex flex-col items-center gap-4 py-6">
-          <div className="flex items-center justify-center gap-6">
+        <div className="flex flex-col items-center gap-4 py-4 sm:py-6">
+          <div className="flex items-center justify-center gap-4 sm:gap-6">
             <a
               href="https://twitter.com/kz25_kmc/"
               target="_blank"
               rel="noopener noreferrer"
               className="transition-opacity hover:opacity-70"
             >
-              <FaXTwitter className="text-3xl" />
+              <FaXTwitter className="text-2xl sm:text-3xl" />
             </a>
             <a
               href="https://github.com/tarabakz25/"
@@ -77,7 +77,7 @@ const ContactDialog: React.FC<ContactDialogProps> = ({ open, onOpenChange }) => 
               rel="noopener noreferrer"
               className="transition-opacity hover:opacity-70"
             >
-              <FaGithub className="text-3xl" />
+              <FaGithub className="text-2xl sm:text-3xl" />
             </a>
             <a
               href="https://note.com/kz25_01"
@@ -85,14 +85,14 @@ const ContactDialog: React.FC<ContactDialogProps> = ({ open, onOpenChange }) => 
               rel="noopener noreferrer"
               className="transition-opacity hover:opacity-70"
             >
-              <img src={noteIcon} alt="note icon" className="h-8 w-auto" />
+              <img src={noteIcon} alt="note icon" className="h-6 sm:h-8 w-auto" />
             </a>
           </div>
         </div>
 
-        <div className="py-6 font-eurostile">
+        <div className="py-4 sm:py-6 font-eurostile px-2 sm:px-0">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
+            <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4 sm:space-y-6">
               <FormField
                 control={form.control}
                 name="name"
@@ -128,7 +128,7 @@ const ContactDialog: React.FC<ContactDialogProps> = ({ open, onOpenChange }) => 
                     <FormControl>
                       <Textarea
                         placeholder="Message content..."
-                        className="min-h-32"
+                        className="min-h-24 sm:min-h-32"
                         {...field}
                       />
                     </FormControl>
@@ -137,7 +137,7 @@ const ContactDialog: React.FC<ContactDialogProps> = ({ open, onOpenChange }) => 
                 )}
               />
               <div className="flex justify-center gap-4">
-                <Button type="submit" className="mx-16 bg-[#252525] transition-scale hover:scale-105 hover:bg-[#252525]">
+                <Button type="submit" className="w-full sm:w-auto mx-0 sm:mx-16 bg-[#252525] transition-scale hover:scale-105 hover:bg-[#252525]">
                   SEND A MESSAGE
                 </Button>
               </div>
