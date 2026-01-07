@@ -1,74 +1,13 @@
 ---
 import Layout from "~/layouts/Layout.astro";
-import gsap from "gsap";
-
-import Header from "~/components/header.tsx";
-import Footer from "~/components/footer.tsx";
 import Shader from "~/components/shader.tsx";
-import Loading from "~/components/loading.tsx";
-
-import Logo from "~/assets/kz_creation.svg";
+import App from "~/components/App.tsx";
 ---
 
 <Layout>
-  <Loading client:load />
-
   <div class="fixed inset-0 -z-10 w-full">
     <Shader client:load />
   </div>
 
-  <main
-    id="main-content"
-    class="w-full h-screen flex flex-col items-center justify-between opacity-0"
-  >
-    <Header />
-
-    <Logo />
-
-    <Footer />
-  </main>
+  <App client:load />
 </Layout>
-
-<script>
-  import gsap from "gsap";
-
-  const hasVisited = sessionStorage.getItem("hasVisited");
-  const loadingElement = document.querySelector(
-    ".fixed.inset-0.z-50",
-  ) as HTMLElement;
-  const mainContent = document.getElementById("main-content") as HTMLElement;
-
-  if (hasVisited) {
-    if (loadingElement) {
-      loadingElement.style.display = "none";
-    }
-    gsap.to(mainContent, {
-      opacity: 1,
-      duration: 0.5,
-      ease: "power2.out",
-    });
-  } else {
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        sessionStorage.setItem("hasVisited", "true");
-
-        if (loadingElement) {
-          gsap.to(loadingElement, {
-            opacity: 0,
-            duration: 0.5,
-            ease: "power2.out",
-            onComplete: () => {
-              loadingElement.style.display = "none";
-            },
-          });
-        }
-
-        gsap.to(mainContent, {
-          opacity: 1,
-          duration: 0.8,
-          ease: "power2.out",
-        });
-      }, 2500);
-    });
-  }
-</script>
