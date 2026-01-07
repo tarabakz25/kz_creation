@@ -1,8 +1,5 @@
 ---
 import { Analytics } from "@vercel/analytics/react";
-import { ViewTransitions } from "astro:transitions";
-import ViewTransitionGrid from "~/components/layouts/ViewTransitionGrid";
-import Loading from "~/components/layouts/Loading";
 import "../styles/global.css";
 ---
 
@@ -57,21 +54,11 @@ import "../styles/global.css";
         document.documentElement.setAttribute("data-first-visit", "true");
       }
     </script>
-    <ViewTransitions />
     <title>Kz Creation</title>
   </head>
   <body class="m-0 p-0 overflow-auto min-h-screen w-full">
-    <Loading client:only="react" />
-    <ViewTransitionGrid client:load transition:persist />
     <div id="main-content">
       <slot />
     </div>
   </body>
 </html>
-
-<style is:global>
-  html[data-first-visit] #main-content {
-    opacity: 0;
-    pointer-events: none;
-  }
-</style>

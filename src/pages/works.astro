@@ -15,8 +15,7 @@ const works = workFiles.map(({ default: work }) => work);
 ---
 
 <Layout>
-  <MotionBackground client:load transition:persist transition:name="bg" />
-  <Header client:load currentPage="works" />
+  <Header />
   <div
     class="w-full h-full overflow-y-auto overflow-x-hidden pt-24"
     transition:animate="fade"
