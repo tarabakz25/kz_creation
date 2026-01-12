@@ -1,7 +1,7 @@
 import { Mail } from "lucide-react";
 import { MenuHover } from "./gsap/menuHover";
 
-export default function Header() {
+export default function HeaderTop() {
   const items = [{ label: "profile" }, { label: "lab" }];
 
   return (

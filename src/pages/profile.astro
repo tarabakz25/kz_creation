@@ -1,6 +1,7 @@
 ---
 import Layout from "~/layouts/Layout.astro";
-import Header from "~/components/header";
+import HeaderContent from "~/components/header-content";
+import FooterContent from "~/components/footer-content";
 
 import Icon from "~/assets/images/icon2.webp";
 import Catchcopy from "~/assets/catchcopy.svg";
@@ -24,9 +25,7 @@ const contents = [
 ---
 
 <Layout>
-  <div class="fixed top-0 left-0 right-0 z-10 w-full">
-    <Header client:load />
-  </div>
+  <HeaderContent client:load />
 
   <main
     class="w-full min-h-screen flex flex-col items-center justify-start bg-[#131313] text-white"
@@ -63,28 +62,7 @@ const contents = [
     </div>
   </main>
 
-  <footer
-    class="w-full bg-[#131313] text-white py-20 flex flex-col items-center justify-center gap-8"
-  >
-    <div class="w-full max-w-4xl h-[1px] bg-white/20 mb-8"></div>
-    <div class="flex gap-12">
-      {
-        profile.socials.map((social) => (
-          <a
-            href={social.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-lg font-futura_pt tracking-wider hover:text-white/60 transition-colors"
-          >
-            {social.label}
-          </a>
-        ))
-      }
-    </div>
-    <div class="font-futura_pt text-xs tracking-[0.2em] text-white/40 mt-4">
-      © 2026 Kz Creation
-    </div>
-  </footer>
+  <FooterContent />
 </Layout>
 
 <style>
