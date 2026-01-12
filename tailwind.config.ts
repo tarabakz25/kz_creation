@@ -7,7 +7,7 @@ export default {
       fontFamily: {
         fugaz: ['"Fugaz One"', "sans-serif"],
         fira: ['"Fira Mono"', "monospace"],
-        futura_100: ['"Futura 100"', "sans-serif"],
+        futura_100: ['futura-100', "sans-serif"],
         futura_pt: ['"futura-pt"', "sans-serif"],
         comma: ["comma-sans", "sans-serif"],
         eurostile: ["eurostile", "sans-serif"],
