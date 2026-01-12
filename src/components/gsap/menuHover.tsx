@@ -42,7 +42,7 @@ export const MenuHover = ({ children, href, className }: Props) => {
     <div ref={containerRef} className="cursor-pointer py-1 relative">
       <div
         ref={lineTopRef}
-        className="absolute top-0 left-0 w-full h-[0.1rem] bg-white origin-right scale-x-0"
+        className="absolute top-1 left-0 w-full h-[0.1rem] bg-white origin-right scale-x-0"
       />
       <a href={href} className={className}>
         {children}

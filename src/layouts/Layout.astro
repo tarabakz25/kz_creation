@@ -1,6 +1,7 @@
 ---
 import { Analytics } from "@vercel/analytics/react";
 import "../styles/global.css";
+import { Toaster } from "~/components/ui/sonner";
 ---
 
 <!doctype html>
@@ -59,6 +60,7 @@ import "../styles/global.css";
   <body class="m-0 p-0 overflow-auto min-h-screen w-full">
     <div id="main-content">
       <slot />
+      <Toaster client:load />
     </div>
   </body>
 </html>
