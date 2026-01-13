@@ -1,6 +1,8 @@
 ---
 import Layout from "~/layouts/Layout.astro";
 import Shader from "~/components/shader.tsx";
+import CursorEffect from "~/components/gsap/cursorEffectCanvas";
+import ArrowPointer from "~/components/cursor/arrowPointer";
 
 import Header from "~/components/header-top.tsx";
 import Footer from "~/components/footer-top.tsx";
@@ -10,14 +12,20 @@ import Logo from "~/assets/kz_creation.svg";
 
 <Layout>
   <div class="fixed inset-0 -z-10 w-full">
+    <CursorEffect client:load />
     <Shader client:load />
   </div>
 
-  <div class="flex flex-col items-center justify-between w-full h-screen">
+  <div class="flex flex-col items-center justify-between w-full min-h-screen">
     <Header client:load />
 
     <img src={Logo.src} alt="KZ Creation Logo" />
 
     <Footer />
+  </div>
+
+  <!-- Demo content for scrolling -->
+  <div class="min-h-screen flex items-center justify-center">
+    <h2 class="text-4xl">Scroll Demo Section</h2>
   </div>
 </Layout>

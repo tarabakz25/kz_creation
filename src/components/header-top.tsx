@@ -12,7 +12,7 @@ export default function HeaderTop() {
             <MenuHover
               key={i.label}
               href={`/${i.label}`}
-              className="text-xl font-medium text-white px-1"
+              className="text-xl font-medium text-white px-1 cursor-none"
             >
               {i.label}
             </MenuHover>

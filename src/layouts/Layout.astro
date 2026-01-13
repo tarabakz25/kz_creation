@@ -2,6 +2,8 @@
 import { Analytics } from "@vercel/analytics/react";
 import "../styles/global.css";
 import { Toaster } from "~/components/ui/sonner";
+import ArrowPointer from "~/components/cursor/arrowPointer";
+import SmoothScroll from "~/components/gsap/smoothScroll";
 ---
 
 <!doctype html>
@@ -57,10 +59,14 @@ import { Toaster } from "~/components/ui/sonner";
     </script>
     <title>Kz Creation</title>
   </head>
-  <body class="m-0 p-0 overflow-auto min-h-screen w-full">
-    <div id="main-content">
-      <slot />
-      <Toaster client:load />
+  <body class="m-0 p-0 overflow-auto min-h-screen w-full cursor-none">
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <slot />
+      </div>
     </div>
+    <SmoothScroll client:load />
+    <ArrowPointer client:load />
+    <Toaster client:load />
   </body>
 </html>
