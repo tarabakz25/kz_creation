@@ -2,9 +2,8 @@
 import Layout from "~/layouts/Layout.astro";
 import Shader from "~/components/shader.tsx";
 import CursorEffect from "~/components/gsap/cursorEffectCanvas";
-import ArrowPointer from "~/components/cursor/arrowPointer";
 
-import Header from "~/components/header-top.tsx";
+import HeaderTop from "~/components/header-top.tsx";
 import Footer from "~/components/footer-top.tsx";
 
 import Logo from "~/assets/kz_creation.svg";
@@ -16,10 +15,9 @@ import Logo from "~/assets/kz_creation.svg";
     <Shader client:load />
   </div>
 
-  <div
-    class="flex flex-col items-center justify-between w-full min-h-screen"
-  >
-    <Header client:load />
+  <div class="flex flex-col items-center justify-between w-full min-h-screen">
+    <HeaderTop client:load />
+
     <div class="flex-1 flex items-center justify-center">
       <img src={Logo.src} alt="KZ Creation Logo" />
     </div>
