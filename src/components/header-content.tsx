@@ -27,7 +27,7 @@ export default function HeaderContent() {
         </nav>
       </div>
 
-      <MenuHover href="/contact" className="flex gap-2">
+      <MenuHover href="/contact" className="flex gap-2 cursor-none">
         <Mail className="w-6 h-auto text-white" />
         <p className="text-xl font-medium text-white px-1">Contact</p>
       </MenuHover>

@@ -16,7 +16,7 @@ export default function WorkCard({ name, url, image, tags }: WorkCardProps) {
   return (
     <CardWrapper
       {...cardProps}
-      className="group relative overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 transition-all duration-300 hover:border-white/30 hover:bg-white/10"
+      className="cursor-none group relative overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 transition-all duration-300 hover:border-white/30 hover:bg-white/10"
     >
       <div className="aspect-video w-full overflow-hidden">
         <img

@@ -11,7 +11,7 @@ export default function FooterContent() {
             href={social.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-lg font-futura_pt tracking-wider hover:text-white/60 transition-colors"
+            className="cursor-none text-lg font-futura_pt tracking-wider hover:text-white/60 transition-colors"
           >
             {social.label}
           </a>
