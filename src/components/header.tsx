@@ -1,13 +1,15 @@
-import { Mail } from 'lucide-react';
-import { MenuHover } from '~/components/gsap/menuHover';
+import { Mail } from "lucide-react";
+import { MenuHover } from "~/components/gsap/menuHover";
+import Logo from "~/assets/kz_creation.svg";
 
 interface Props {
-  valiant: string,
-};
+  variant: "top" | "content";
+}
 
-export default function Header({ valiant }: Props) {
-  
-  if (valiant === 'top') {
+const items = [{ label: "profile" }, { label: "lab" }];
+
+export default function Header({ variant }: Props) {
+  if (variant === "top") {
     return (
       <header className="w-full flex items-center justify-between py-6 px-16 font-futura_100 tracking-wider">
         <nav className="flex items-center gap-24">
@@ -23,13 +25,13 @@ export default function Header({ valiant }: Props) {
             );
           })}
         </nav>
-  
+
         <MenuHover href="/contact" className="flex gap-2 cursor-none">
           <Mail className="w-6 h-auto text-white" />
           <p className="text-xl font-medium text-white px-1">Contact</p>
         </MenuHover>
       </header>
-    )
+    );
   } else {
     return (
       <header className="fixed top-0 left-0 right-0 z-50 w-full flex items-center justify-between py-6 px-16 font-futura_100 tracking-wider bg-[#131313]/80 backdrop-blur-sm">
@@ -37,7 +39,7 @@ export default function Header({ valiant }: Props) {
           <a href="/" className="hover:opacity-70 transition-opacity">
             <img src={Logo.src} alt="Kz Creation" className="h-4 w-auto" />
           </a>
-  
+
           <nav className="flex items-center gap-12">
             {items.map((i) => {
               return (
@@ -52,12 +54,12 @@ export default function Header({ valiant }: Props) {
             })}
           </nav>
         </div>
-  
+
         <MenuHover href="/contact" className="flex gap-2 cursor-none">
           <Mail className="w-6 h-auto text-white" />
           <p className="text-xl font-medium text-white px-1">Contact</p>
         </MenuHover>
       </header>
-    )
+    );
   }
 }
