@@ -15,7 +15,7 @@ export default function ArrowPointer() {
     previous: 0,
     displace: 0,
   });
-  const cursorSize = 20;
+  const cursorSize = 30;
   const degrees = 57.296;
 
   useEffect(() => {
@@ -146,7 +146,7 @@ export default function ArrowPointer() {
         zIndex: 2147483647,
         width: `${cursorSize}px`,
         height: `${cursorSize}px`,
-        transition: "250ms, transform 71ms",
+        transition: "250ms, transform 50ms",
         userSelect: "none",
         pointerEvents: "none",
       }}
