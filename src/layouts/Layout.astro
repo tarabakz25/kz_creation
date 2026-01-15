@@ -5,7 +5,6 @@ import { Toaster } from "~/components/ui/sonner";
 import SmoothScroll from "~/components/gsap/smoothScroll";
 
 import Footer from "~/components/layouts/footer";
-
 ---
 
 <!doctype html>
@@ -69,14 +68,15 @@ import Footer from "~/components/layouts/footer";
                           linear-gradient(to bottom, rgba(128, 128, 128, 0.1) 1px, transparent 1px)`,
         backgroundSize: "6rem 6rem",
       }}
-    />
+    >
+    </div>
     <SmoothScroll client:load />
     <div id="smooth-wrapper">
       <div id="smooth-content">
         <slot />
       </div>
     </div>
-    
+
     <div class="fixed left-0 bottom-0 w-full">
       <Footer />
     </div>
