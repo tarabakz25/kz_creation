@@ -19,10 +19,11 @@ export const FadeBlob = ({ children, href, className }: Props) => {
         opacity: 0,
         x: -5,
       });
-      
+
       containerRef.current?.addEventListener('mouseenter', () => {
         gsap.to(textRef.current, {
-          x: 5, duration: animateSpped,
+          x: 5,
+          duration: animateSpped,
         });
         gsap.to(blobRef.current, {
           opacity: 1,
@@ -30,7 +31,7 @@ export const FadeBlob = ({ children, href, className }: Props) => {
           duration: animateSpped,
         });
       });
-      
+
       containerRef.current?.addEventListener('mouseleave', () => {
         gsap.to(textRef.current, {
           x: 0,

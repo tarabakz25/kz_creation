@@ -15,7 +15,7 @@ const socials = [
     url: "https://instagram.com/kz25_01/",
   },
   {
-    name: "prarie card",
+    name: "Prarie Card",
     url: "https://my.prairie.cards/u/kz25_kmc",
   },
 ];
@@ -41,7 +41,7 @@ export default function AboutPage() {
               <a
                 key={index}
                 href={social.url}
-                className="text-white hover:text-gray-300"
+                className="text-white hover:text-gray-300 font-futura_pt"
               >
                 {social.name}
               </a>

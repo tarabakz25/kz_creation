@@ -4,8 +4,12 @@ import { FadeBlob } from '~/components/gsap/fadeBlob';
 
 const menuItems = [
   {
+    title: "top",
+    url: "/",
+  },
+  {
     title: "about",
-    url: "/about"
+    url: "/about",
   },
   {
     title: "lab",
