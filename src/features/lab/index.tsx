@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
 import { useGSAP } from "@gsap/react";
 import MenuItem from "~/shared/components/layouts/menuItem";
+import { PageTransitionProvider } from "~/shared/components/pageTransition";
 import worksData from "./content/works.json";
 import type { ImageMetadata } from "astro";
 
@@ -97,6 +98,7 @@ export default function LabPage() {
   if (!currentWork) return null;
 
   return (
+    <PageTransitionProvider>
     <main className="h-screen flex justify-between px-[5vw] py-[10vh] overflow-hidden">
       {/* Left Section: Static */}
       <div className="flex flex-col items-start w-full min-h-screen text-white gap-8 z-20 pointer-events-none">
@@ -170,5 +172,6 @@ export default function LabPage() {
         </div>
       </div>
     </main>
+    </PageTransitionProvider>
   );
 }

@@ -187,3 +187,9 @@ body.prevent-scroll {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/* Page transition - hide content before React hydrates */
+html[data-page-entry] #smooth-wrapper,
+html[data-first-visit] #smooth-wrapper {
+  opacity: 0;
+}

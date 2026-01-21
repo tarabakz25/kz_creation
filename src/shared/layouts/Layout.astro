@@ -57,6 +57,10 @@ import Footer from "~/shared/components/layouts/footer";
       if (!hasVisited) {
         document.documentElement.setAttribute("data-first-visit", "true");
       }
+      // Page transition detection - hide content before React hydrates
+      if (sessionStorage.getItem("pageTransition") === "true") {
+        document.documentElement.setAttribute("data-page-entry", "true");
+      }
     </script>
     <title>Kz Creation</title>
   </head>

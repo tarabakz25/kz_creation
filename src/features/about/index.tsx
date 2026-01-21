@@ -1,5 +1,6 @@
 import profile from "./content/kizuki-aiki.json";
 import MenuItem from "~/shared/components/layouts/menuItem";
+import { PageTransitionProvider } from "~/shared/components/pageTransition";
 
 const socials = [
   {
@@ -22,6 +23,7 @@ const socials = [
 
 export default function AboutPage() {
   return (
+    <PageTransitionProvider>
     <main className="h-screen flex justify-between px-[5vw] py-[10vh]">
       <div className="flex flex-col items-start w-full min-h-screen text-white gap-8">
         <h1 className="text-3xl font-futura_pt tracking-wider">Who am I ?</h1>
@@ -50,5 +52,6 @@ export default function AboutPage() {
         </div>
       </div>
     </main>
+    </PageTransitionProvider>
   );
 }
