@@ -1,19 +1,13 @@
 [
   {
     "name": "Infomatic AI -JAPAN AI HACKATHON 2025-",
-    "url": "",
+    "url": "https://engineering.japan-ai.co.jp/advent-10",
     "image": "~/assets/content/works/japan-ai-hackathon-2025.webp",
     "tags": ["hackathon", "web", "award"]
   },
   {
-    "name": "Adobe MAX 2023",
-    "url": "",
-    "image": "~/assets/content/works/adobe-max-2023.webp",
-    "tags": ["hackathon", "web"]
-  },
-  {
     "name": "ESG Data Hub",
-    "url": "",
+    "url": "https://student.redesigner.jp/portfolios/PF6bd4017c2c214a04f8a468409299cbf0",
     "image": "~/assets/content/works/esg.webp",
     "tags": ["hackathon", "web"]
   },
@@ -31,7 +25,7 @@
   },
   {
     "name": "Business Card",
-    "url": "",
+    "url": "https://student.redesigner.jp/portfolios/PF5b446ea089a2b15d545488077cf2cbe9",
     "image": "~/assets/content/works/business-card.webp",
     "tags": ["design", "figma"]
   }

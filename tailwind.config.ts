@@ -5,12 +5,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        fugaz: ["Fugaz One", "sans-serif"],
-        futura_100: ["futura-100", "sans-serif"],
         futura_pt: ["futura-pt", "sans-serif"],
         comma: ["comma-sans", "sans-serif"],
-        eurostile: ["eurostile", "sans-serif"],
-        eurostile_cond: ["eurostile-condensed", "sans-serif"],
         shuei_gothic: ["dnp-shuei-gothic-gin-std", "sans-serif"],
         avenir: ["avenir-lt-pro", "sans-serif"],
       },
