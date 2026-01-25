@@ -23,5 +23,21 @@ export default function SmoothScroll() {
     };
   });
 
+  // SPAナビゲーション時にScrollSmootherをリフレッシュ
+  useEffect(() => {
+    const handleNavigation = () => {
+      if (smootherRef.current) {
+        // スクロール位置をトップにリセット
+        smootherRef.current.scrollTo(0, false);
+        // ScrollTriggerをリフレッシュ
+        ScrollTrigger.refresh();
+      }
+    };
+
+    // カスタムイベントでナビゲーションを検知
+    window.addEventListener("spa-navigation", handleNavigation);
+    return () => window.removeEventListener("spa-navigation", handleNavigation);
+  }, []);
+
   return null;
 }

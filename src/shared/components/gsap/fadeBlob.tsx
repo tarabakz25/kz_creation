@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { usePageTransition } from "~/shared/components/pageTransition";
+import { useNavigation } from "~/features/app/NavigationContext";
 
 interface Props {
   children: React.ReactNode;
@@ -12,7 +12,7 @@ export const FadeBlob = ({ children, href, className }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const blobRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLAnchorElement>(null);
-  const { navigateTo } = usePageTransition();
+  const { navigateTo } = useNavigation();
 
   useEffect(() => {
     const animateSpped = 0.3;
@@ -65,12 +65,7 @@ export const FadeBlob = ({ children, href, className }: Props) => {
         ref={blobRef}
         className="w-1.5 h-1.5 bg-white rounded-full mr-1 opacity-0"
       />
-      <a
-        ref={textRef}
-        href={href}
-        onClick={handleClick}
-        className={className}
-      >
+      <a ref={textRef} href={href} onClick={handleClick} className={className}>
         {children}
       </a>
     </div>

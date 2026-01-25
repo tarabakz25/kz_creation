@@ -1,0 +1,17 @@
+---
+import Layout from "~/shared/layouts/Layout.astro";
+import App from "~/features/app/App";
+
+// 有効なルートのみ許可
+const validRoutes = ["about", "lab", "contact"];
+const { slug } = Astro.params;
+
+// 無効なルートはホームにリダイレクト
+if (slug && !validRoutes.includes(slug as string)) {
+  return Astro.redirect("/");
+}
+---
+
+<Layout>
+  <App client:load />
+</Layout>
