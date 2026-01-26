@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "motion/react";
 import { NavigationProvider, useNavigation } from "./NavigationContext";
-import { useFirstVisitLoading } from "~/shared/hooks/useFirstVisitLoading";
+import { useFirstVisitLoading } from "~/hooks/useFirstVisitLoading";
 import IndexPage from "~/features/index";
 import AboutPage from "~/features/about";
 import LabPage from "~/features/lab";
